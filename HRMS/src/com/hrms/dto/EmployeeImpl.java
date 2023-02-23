@@ -17,10 +17,24 @@ public class EmployeeImpl implements Employee{
 		super();
 	}
 	
-	public EmployeeImpl(int id, String firstName, String lastName, String mobile, String email, String password,
+	public EmployeeImpl(String firstName, String lastName, String mobile, String email, String password,
 			String dateOfBirth, String address, int salary, String dateOfJoining, int departmentId) {
 		super();
-		this.id = id;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.mobile = mobile;
+		this.email = email;
+		this.password = password;
+		this.dateOfBirth = dateOfBirth;
+		this.address = address;
+		this.salary = salary;
+		this.dateOfJoining = dateOfJoining;
+		this.departmentId = departmentId;
+	}
+	
+	public EmployeeImpl(int id,String firstName, String lastName, String mobile, String email, String password,
+			String dateOfBirth, String address, int salary, String dateOfJoining, int departmentId) {
+		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobile = mobile;
