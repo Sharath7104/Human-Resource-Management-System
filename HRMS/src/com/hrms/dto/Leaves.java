@@ -28,4 +28,8 @@ public interface Leaves {
 	public String getStatus();
 
 	public void setStatus(String status);
+	
+	public void setLeaveId(int leaveid);
+	
+	public int getLeaveId();
 }

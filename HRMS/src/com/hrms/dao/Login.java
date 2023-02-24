@@ -28,25 +28,25 @@ public class Login {
 	}
 	
 	
-	public static Employee employeeLogin() throws EmployeeException {
-		Employee emp = new EmployeeImpl();
+	public static EmployeeImpl employeeLogin() throws EmployeeException {
+		EmployeeImpl emp = new EmployeeImpl();
 		
 		Scanner sc = new Scanner(System.in);
-		System.out.println("Enter your Email");
-		String email = sc.next();
 		
-		System.out.println("Enter your Password");
-		String password = sc.next();
 		Connection conn = null;
 		
 		try {
 			conn = DBUtils.connectToDatabase();
+			System.out.println("Enter your Email");
+			String email = sc.next();
+			
+			System.out.println("Enter your Password");
+			String password = sc.next();
 			String selectquery = "SELECT * FROM EMPLOYEE WHERE EMAIL = ?";
 			PreparedStatement ps = conn.prepareStatement(selectquery);
 			ps.setString(1, email);
 			
 			ResultSet rs = ps.executeQuery();
-			
 			if(rs.next()) {
 				emp.setId(rs.getInt("id"));
 				emp.setFirstName(rs.getString("firstName"));
@@ -59,18 +59,19 @@ public class Login {
 				emp.setSalary(rs.getInt("salary"));
    				emp.setDateOfJoining(rs.getString("dateofjoining"));
    				emp.setDepartmentId(rs.getInt("departmentId"));
-			}
-			
-			if(!emp.getPassword().equals(password)) {
-				throw new EmployeeException("Please check the password and try again later");
+   				
+   				if(!emp.getPassword().equals(password)) {
+   					throw new EmployeeException("Please check the password and try again later");
+   				}
 			}else {
-				throw new EmployeeException("The Entered Email does not exist!");
-			}
+					throw new EmployeeException("The Entered Email does not exist!");
+				}
+			
+			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return emp;
 		
 	}
