@@ -3,7 +3,7 @@ package com.hrms.login;
 import java.util.Scanner;
 
 import com.hrms.dao.Login;
-import com.hrms.dto.Employee;
+import com.hrms.dto.EmployeeImpl;
 import com.hrms.exception.DepartmentException;
 import com.hrms.exception.EmployeeException;
 import com.hrms.menudisplay.MenuDisplay;
@@ -25,21 +25,26 @@ public class LoginMain {
 				if(Login.adminLogin()) {
 					try {
 						MenuDisplay.admin();
+						
 					} catch (DepartmentException e) {
 						// TODO Auto-generated catch block
 						System.out.println(e.getMessage());
 					}
+				}else {
+					System.err.println("Incorrect Email Or Password!! Please check and try again later");
 				}
 				break;
 				
 			case 2:
 				try {
-					Employee emp = Login.employeeLogin();
+					EmployeeImpl emp = Login.employeeLogin();
+					MenuDisplay.employee(emp);
 				} catch (EmployeeException e) {
 					// TODO Auto-generated catch block
 					System.out.println(e.getMessage());
 				}
 				break;
+				
 				
 			case 0:
 				System.out.println("Thank you see you again!!!");

@@ -8,6 +8,7 @@ public class LeavesImpl implements Leaves{
 	private String leaveStart;
 	private String leaveEnd;
 	private String status;
+	private int leaveid;
 	
 	public LeavesImpl() {
 		super();
@@ -86,6 +87,18 @@ public class LeavesImpl implements Leaves{
 		return "LeavesImpl [employeeId=" + employeeId + ", firstName=" + firstName + ", lastName=" + lastName
 				+ ", departmentId=" + departmentId + ", leaveStart=" + leaveStart + ", leaveEnd=" + leaveEnd
 				+ ", status=" + status + "]";
+	}
+
+	@Override
+	public void setLeaveId(int leaveid) {
+		// TODO Auto-generated method stub
+		this.leaveid = leaveid;
+	}
+
+	@Override
+	public int getLeaveId() {
+		// TODO Auto-generated method stub
+		return leaveid;
 	}
 	
 	

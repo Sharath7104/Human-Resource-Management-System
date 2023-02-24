@@ -108,7 +108,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		Scanner sc=new Scanner(System.in);
 		
 		System.out.println("Enter new password");
-		String npass=sc.next();
+		String npass= sc.next();
 		
 		try (Connection con=DBUtils.connectToDatabase()){
 			String updatepassquery = "update employee set password=? where id=?";
@@ -136,7 +136,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.setInt(1, id);
 			
 			ResultSet rs = ps.executeQuery();
-			String message;
 			if(rs.next()) {
 				Scanner sc = new Scanner(System.in);
 				System.out.println("Enter existing password");
@@ -145,7 +144,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 					changePass(id);
 				}
 				else {
-					message="Incorrect password";
+					System.out.println("Incorrect password");
 				}
 			}
 			else {
@@ -167,7 +166,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.setInt(1, id);
 			
 			ResultSet rs=ps.executeQuery();
-			DateFormat dateFormat=new SimpleDateFormat("yyyy-mm-dd");
+			SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
 			
             if(rs.next()) {
 				
@@ -178,11 +177,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				String email=rs.getString("email");
 				String password=rs.getString("password");
 				Date dob=rs.getDate("dateOfBirth");
-				String dateOfBirth=dateFormat.format(dob); 
+				String dateOfBirth=dateFormat.format(dob);
+				System.out.println(dateOfBirth);
 				String address=rs.getString("address");
 				int salary=rs.getInt("salary");
-				Date hd=rs.getDate("dateofjoining");
-				String dateofjoining=dateFormat.format(hd);
+				Date dj=rs.getDate("dateofjoining");
+				String dateofjoining = dateFormat.format(dj);
 				int departmentId=rs.getInt("departmentId");
 				
 				emp= new EmployeeImpl(id1,firstname, lastname, mobile, email, password, dateOfBirth, address, salary, dateofjoining, departmentId);
@@ -201,13 +201,53 @@ public class EmployeeDaoImpl implements EmployeeDao {
 	@Override
 	public List<EmployeeImpl> employeeByDepartment(int id) throws EmployeeException {
 		// TODO Auto-generated method stub
-		return null;
+		List<EmployeeImpl> emp = new ArrayList();
+		try (Connection con=DBUtils.connectToDatabase()){
+			String selectquery = "select * from Employee Where departmentID=?";
+			PreparedStatement ps=con.prepareStatement(selectquery);
+			ps.setInt(1, id);
+			ResultSet rs=ps.executeQuery();
+			while(rs.next()) {
+				EmployeeImpl e=new EmployeeImpl();
+				e.setId(rs.getInt("id"));
+				e.setFirstName(rs.getString("firstName"));
+				e.setLastName(rs.getString("lastName"));
+				e.setMobile(rs.getString("mobile"));
+				e.setEmail(rs.getString("email"));
+				e.setPassword(rs.getString("password"));
+				e.setDateOfBirth(rs.getString("dateOfBirth"));
+				e.setAddress(rs.getString("address"));
+				e.setSalary(rs.getInt("salary"));
+				e.setDateOfJoining(rs.getString("dateofjoining"));
+				e.setDepartmentId(rs.getInt("departmentID"));
+				
+				emp.add(e);
+			}
+			
+		} catch (SQLException e) {
+			// TODO: handle exception
+			throw new EmployeeException(e.getMessage());
+		}
+		
+		if(emp.size()==0) throw new EmployeeException("No employee found in this department");
+		
+		return emp;
 	}
 
 	@Override
 	public void updateEmployee(String Column, String typeName, int id) throws EmployeeException {
 		// TODO Auto-generated method stub
-		
+		try (Connection con=DBUtils.connectToDatabase()) {
+			
+			PreparedStatement ps=con.prepareStatement("update employee set "+Column+"=? where id=?");
+			
+			ps.setString(1, typeName);
+			ps.setInt(2, id);
+			
+			System.out.println(ps.executeUpdate()>0 ? "Updated Successfully" : "Something went wrong");
+		} catch (SQLException e) {
+			e.getMessage();
+		}
 	}
 
 }
