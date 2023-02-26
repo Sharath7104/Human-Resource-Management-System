@@ -21,29 +21,48 @@ import com.hrms.operations.ShowAllApprovedLeaves;
 import com.hrms.operations.ShowAllRejectedLeave;
 import com.hrms.operations.UpdateDepartment;
 import com.hrms.operations.UpdateEmployee;
+import com.hrms.tablesprint.ConsoleColors;
 
 public class MenuDisplay {
-	public static void admin() throws DepartmentException, EmployeeException {
+	public static void admin() throws DepartmentException, EmployeeException, InterruptedException {
 		int choice = 0;
 		Scanner sc = new Scanner(System.in);
 		do {
-			System.out.println("1.Add Department");
-			System.out.println("2.View All Departments");
-			System.out.println("3.Update Department");
-			System.out.println("4.Add new Employee");
-			System.out.println("5.Display All Employee's");
-			System.out.println("6.Change Employee Department");
-			System.out.println("7.Change Employee Password");
-			System.out.println("8.Get Employee By Id");
-			System.out.println("9.Get Employee By Department");
-			System.out.println("10.Update Employee");
-			System.out.println("11.View Pending Leave Requests");
-			System.out.println("12.View Approved Leave Requests");
-			System.out.println("13.View Rejected Leave Requests");
-			System.out.println("Press 0 to Logout");
-			System.out.println("Choose Option");
+			System.out.println();
+			System.out.println(ConsoleColors.GREEN_BOLD +"-----------Menus-----------" + ConsoleColors.RESET);
+			System.out.println(ConsoleColors.BLUE_BOLD +"╚═> 1.Add Department");
+			Thread.sleep(200);
+			System.out.println("╚═> 2.View All Departments");
+			Thread.sleep(200);
+			System.out.println("╚═> 3.Update Department");
+			Thread.sleep(200);
+			System.out.println("╚═> 4.Add new Employee");
+			Thread.sleep(200);
+			System.out.println("╚═> 5.Display All Employee's");
+			Thread.sleep(200);
+			System.out.println("╚═> 6.Change Employee Department");
+			Thread.sleep(200);
+			System.out.println("╚═> 7.Change Employee Password");
+			Thread.sleep(200);
+			System.out.println("╚═> 8.Get Employee By Id");
+			Thread.sleep(200);
+			System.out.println("╚═> 9.Get Employee By Department");
+			Thread.sleep(200);
+			System.out.println("╚═> 10.Update Employee");
+			Thread.sleep(200);
+			System.out.println("╚═> 11.View Pending Leave Requests");
+			Thread.sleep(200);
+			System.out.println("╚═> 12.View Approved Leave Requests");
+			Thread.sleep(200);
+			System.out.println("╚═> 13.View Rejected Leave Requests");
+			Thread.sleep(200);
+			System.out.println("╚═> Press 0 to Logout");
+			Thread.sleep(200);
+			System.out.println(ConsoleColors.GREEN_BOLD +"************** Choose Option **************"+ ConsoleColors.RESET);
 			
-			choice = sc.nextInt();
+			System.out.println(ConsoleColors.BLUE_BOLD);
+    		choice=sc.nextInt();
+    		System.out.println(ConsoleColors.RESET);
 			
 			switch(choice) {
 			case 1:
@@ -93,18 +112,22 @@ public class MenuDisplay {
 			case 13:
 				ShowAllRejectedLeave.main(null);
 				break;
+			case 0:
+				System.out.println(ConsoleColors.GREEN+"Thank you see you again!!!");
+				System.exit(0);
+				break;
 			default:
-				System.out.println("Please Enter valid Input");
+				System.err.println("Please Enter valid Input");
 			}
 			
 			
 			
 		}while(choice != 0);
-		sc.close();
+		
 	}
 	
 	
-    public static void employee(EmployeeImpl employee) {
+    public static void employee(EmployeeImpl employee) throws InterruptedException {
     	
     	Scanner sc=new Scanner(System.in);
     	
@@ -112,23 +135,24 @@ public class MenuDisplay {
     	do {
     		
     	    	System.out.println();
-    	    	
-    			System.out.println("1.  View Profile");
+    	    	System.out.println(ConsoleColors.GREEN_BOLD +"--------- Menus --------"+ConsoleColors.RESET);
+    			System.out.println(ConsoleColors.BLUE_BOLD +"╚═> 1.  View Profile");
     			
-    			System.out.println("2.  Update Profile");
-    			
-    			System.out.println("3.  Change Password");
-    			
-    			System.out.println("4.  Apply for Leave");
-    			
-    			System.out.println("5.  Check Leave Status");
-    		
-    			System.out.println("0.  EXIT");
-    			
+    			System.out.println("╚═> 2.  Update Profile");
+    			Thread.sleep(300);
+    			System.out.println("╚═> 3.  Change Password");
+    			Thread.sleep(300);
+    			System.out.println("╚═> 4.  Apply for Leave");
+    			Thread.sleep(300);
+    			System.out.println("╚═> 5.  Check Leave Status");
+    			Thread.sleep(300);
+    			System.out.println("╚═> 0.  EXIT"+ConsoleColors.RESET);
+    			Thread.sleep(300);
     			System.out.println();
-    			System.out.println("———————— CHOOSE OPTION ————————");
-    	    	
+    			System.out.println(ConsoleColors.GREEN_BOLD +"************** CHOOSE OPTION **************"+ConsoleColors.RESET);
+    	    	System.out.println(ConsoleColors.BLUE_BOLD);
     		choice=sc.nextInt();
+    		System.out.println(ConsoleColors.RESET);
     		switch(choice) {
     		case 1:
     			GetEmployeeById.main(employee.getId());
@@ -156,14 +180,15 @@ public class MenuDisplay {
 				}
     			break;
     		case 0:
-    			System.out.println("Thank You See You Again!!");
-    			return;
+    			System.out.println(ConsoleColors.GREEN +"Thank You See You Again!!");
+    			System.exit(0);
+    			break;
     			default:
-    				System.out.println("Wrong Input");
+    				System.err.println("Wrong Input");
     		}
     	}while(choice != 0);
     	
-    	sc.close();
+    	
     }
     
 }

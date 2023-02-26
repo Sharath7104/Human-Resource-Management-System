@@ -6,10 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.hrms.dto.Department;
 import com.hrms.dto.DepartmentImpl;
 import com.hrms.exception.DepartmentException;
+import com.hrms.tablesprint.ConsoleColors;
 
 public class DepartmentDaoImpl implements DepartmentDao {
 
@@ -21,23 +23,29 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		
 		try {
 			conn = DBUtils.connectToDatabase();
-			System.out.println("Connection successful");
+//			System.out.println("Connection successful");
 			String addquery = "INSERT INTO DEPARTMENT(NAME) VALUE (?)";
 			
 //			System.out.println("Connection Successful");
 			PreparedStatement ps = conn.prepareStatement(addquery);
 			ps.setString(1, dept.getName());
 			
-			System.out.println(ps.executeUpdate()>0 ? "Department Added Successfully" : "Something went wrong");
+			if(ps.executeUpdate()>0) {
+				System.out.println(ConsoleColors.GREEN_BOLD + "Department Added Successfully" + ConsoleColors.RESET);
+			}else {
+				System.out.println(ConsoleColors.RED_BOLD + "Something Went Wrong" + ConsoleColors.RESET);
+			}
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-//			throw new DepartmentException("Department Adding Failed");
+//			e.printStackTrace();
+			throw new DepartmentException("Department Adding Failed");
 		}
 		finally {
 			try {
 				DBUtils.closeConnection(conn);
-				System.out.println("Connection closed");
+//				System.out.println("Connection closed");
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -86,13 +94,18 @@ public class DepartmentDaoImpl implements DepartmentDao {
 			ps.setString(1,dept.getName());
 			ps.setInt(2,dept.getId());
 			
-			System.out.println(ps.executeUpdate()>0 ? "Updated Successfully" : "Something went wrong");
+			if(ps.executeUpdate()>0) {
+				System.out.println(ConsoleColors.GREEN_BOLD + "Updated Successfully" + ConsoleColors.RESET);
+			}else {
+				System.out.println(ConsoleColors.RED_BOLD + "Something Went Wrong" + ConsoleColors.RESET);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally {
 			try {
 				DBUtils.closeConnection(conn);
+				
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -100,5 +113,7 @@ public class DepartmentDaoImpl implements DepartmentDao {
 		}
 		
 	}
+	
+	
 
 }

@@ -10,6 +10,7 @@ import java.util.Scanner;
 import com.hrms.dto.Employee;
 import com.hrms.dto.EmployeeImpl;
 import com.hrms.exception.EmployeeException;
+import com.hrms.tablesprint.ConsoleColors;
 
 public class Login {
 	public static boolean adminLogin() {
@@ -19,6 +20,7 @@ public class Login {
 		String username = sc.next();
 		System.out.println("Enter Password");
 		String password = sc.next();
+		System.out.println(ConsoleColors.RESET);
 		
 		if(username.equals("admin") && password.equals("admin111")) {
 			return true;
@@ -42,6 +44,7 @@ public class Login {
 			
 			System.out.println("Enter your Password");
 			String password = sc.next();
+			System.out.println(ConsoleColors.RESET);
 			String selectquery = "SELECT * FROM EMPLOYEE WHERE EMAIL = ?";
 			PreparedStatement ps = conn.prepareStatement(selectquery);
 			ps.setString(1, email);
