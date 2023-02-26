@@ -21,10 +21,5 @@ public static void main(String[] args) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
-	if(list.size()==0) {
-		System.out.println("No Leave Request");
-		return;
-	}
 }
 }

@@ -22,9 +22,9 @@ public static void main(String[] args) {
 		e.printStackTrace();
 	}
 	
-	if(list.size()==0) {
-		System.out.println("No Leave Request");
-		return;
-	}
+//	if(list.size()==0) {
+//		System.out.println("No Leave Request");
+//		return;
+//	}
 }
 }

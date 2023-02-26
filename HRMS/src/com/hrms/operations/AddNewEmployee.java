@@ -30,12 +30,12 @@ public class AddNewEmployee {
 		String jd=sc.next();
 		System.out.println("Enter Department ID for Employee");
 		int did=sc.nextInt();
-		String pass='$'+fname+'@'+lname;
+		String pass=fname+'@'+lname+"123";
 		
 		EmployeeDao empdao = new EmployeeDaoImpl();
 		empdao.registerEmployee(new EmployeeImpl(fname,lname,mob,email,pass,dob,add,sal,jd,did));
 		
-		sc.close();
+		
 	
 	}
 }

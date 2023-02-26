@@ -13,7 +13,9 @@ import java.util.Scanner;
 
 import com.hrms.dto.Employee;
 import com.hrms.dto.EmployeeImpl;
+import com.hrms.exception.DepartmentException;
 import com.hrms.exception.EmployeeException;
+import com.hrms.tablesprint.ConsoleColors;
 
 public class EmployeeDaoImpl implements EmployeeDao {
 
@@ -37,7 +39,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.setString(9, employee.getDateOfJoining());
 			ps.setInt(10, employee.getDepartmentId());
 			
-			System.out.println(ps.executeUpdate()>0 ? "Employee Added Successfully ! Password is " + employee.getPassword()+" " : "Something went wrong");
+			if(ps.executeUpdate()>0) {
+				System.out.println(ConsoleColors.GREEN_BOLD + "Employee Added Successfully ! Password is " + employee.getPassword()+" " + ConsoleColors.RESET);
+			}else {
+				System.out.println(ConsoleColors.RED_BOLD + "Something Went Wrong" + ConsoleColors.RESET);
+			}
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -84,6 +91,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			throw new EmployeeException(e.getMessage());
 		}
 		
+		if(emplist.size()==0)
+			try {
+				Thread.sleep(300);
+				throw new EmployeeException("No Employee found");
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
 		// TODO Auto-generated method stub
 		return emplist;
 	}
@@ -96,7 +112,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.setInt(1,newDepartmentID);
 			ps.setInt(2,employeeID);
 			
-			System.out.println(ps.executeUpdate()>0 ? "Department Changed" : "Something went wrong");
+			if(ps.executeUpdate()>0) {
+				System.out.println(ConsoleColors.GREEN_BOLD + "Department Changed" + ConsoleColors.RESET);
+			}else {
+				System.out.println(ConsoleColors.RED_BOLD + "Something Went Wrong" + ConsoleColors.RESET);
+			}
+			
 			
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -116,7 +137,12 @@ public class EmployeeDaoImpl implements EmployeeDao {
 			ps.setString(1, npass);
 			ps.setInt(2, id);
 			
-			System.out.println(ps.executeUpdate()>0 ? "Password Updated Successfully": "Something went wrong");
+			if(ps.executeUpdate()>0) {
+				System.out.println(ConsoleColors.GREEN_BOLD + "Password Updated Successfully" + ConsoleColors.RESET);
+			}else {
+				System.out.println(ConsoleColors.RED_BOLD + "Something Went Wrong" + ConsoleColors.RESET);
+			}
+			
 		} catch (SQLException e) {
 			e.getMessage();
 		}
@@ -144,7 +170,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 					changePass(id);
 				}
 				else {
-					System.out.println("Incorrect password");
+					System.err.println("Incorrect password");
 				}
 			}
 			else {
@@ -178,7 +204,6 @@ public class EmployeeDaoImpl implements EmployeeDao {
 				String password=rs.getString("password");
 				Date dob=rs.getDate("dateOfBirth");
 				String dateOfBirth=dateFormat.format(dob);
-				System.out.println(dateOfBirth);
 				String address=rs.getString("address");
 				int salary=rs.getInt("salary");
 				Date dj=rs.getDate("dateofjoining");
@@ -240,11 +265,16 @@ public class EmployeeDaoImpl implements EmployeeDao {
 		try (Connection con=DBUtils.connectToDatabase()) {
 			
 			PreparedStatement ps=con.prepareStatement("update employee set "+Column+"=? where id=?");
-			
+
 			ps.setString(1, typeName);
 			ps.setInt(2, id);
 			
-			System.out.println(ps.executeUpdate()>0 ? "Updated Successfully" : "Something went wrong");
+			if(ps.executeUpdate()>0) {
+				System.out.println(ConsoleColors.GREEN_BOLD + "Updated Successfully" + ConsoleColors.RESET);
+			}else {
+				System.out.println(ConsoleColors.RED_BOLD + "Something Went Wrong" + ConsoleColors.RESET);
+			}
+			
 		} catch (SQLException e) {
 			e.getMessage();
 		}

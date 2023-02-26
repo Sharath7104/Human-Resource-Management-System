@@ -14,12 +14,12 @@ public class AddDepartment {
 		
 		DepartmentDao deptdao = new DepartmentDaoImpl();
 		try {
-			System.out.println(deptname);
+//			System.out.println(deptname);
 			deptdao.addDepartment(new DepartmentImpl(deptname));
 		} catch (DepartmentException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sc.close();
+//		sc.close();
 	}
 }

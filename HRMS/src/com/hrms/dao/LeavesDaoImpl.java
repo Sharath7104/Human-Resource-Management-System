@@ -15,6 +15,7 @@ import com.hrms.exception.EmployeeException;
 import com.hrms.exception.LeavesException;
 import com.hrms.menudisplay.MenuDisplay;
 import com.hrms.operations.PendingLeaves;
+import com.hrms.tablesprint.ConsoleColors;
 
 public class LeavesDaoImpl implements LeavesDao{
 
@@ -30,7 +31,11 @@ public class LeavesDaoImpl implements LeavesDao{
 			ps.setString(5, lname);
 			ps.setInt(6, departmentid);
 			
-			System.out.println(ps.executeUpdate()>0 ? "Your Leave Request has been sent to Admin" : "Something went wrong");
+			if(ps.executeUpdate()>0) {
+				System.out.println(ConsoleColors.GREEN_BOLD + "Thank You!!!\n"+"Your Leave Request has been sent to Admin" + ConsoleColors.RESET);
+			}else {
+				System.out.println(ConsoleColors.RED_BOLD + "Something Went Wrong" + ConsoleColors.RESET);
+			}
 			
 		} catch (SQLException e) {
 			// TODO: handle exception
@@ -74,10 +79,10 @@ public class LeavesDaoImpl implements LeavesDao{
 			e.printStackTrace();
 		}
 		if(list.size() == 0) {
-			System.out.println("No Pending Leaves!!!");
+			System.out.println("No Records Found!!!");
 		}
 		
-		sc.close();
+		
 		return list;
 	}
 
@@ -116,10 +121,10 @@ public class LeavesDaoImpl implements LeavesDao{
 			e.printStackTrace();
 		}
 		if(list.size() == 0) {
-			System.out.println("No Pending Leaves!!!");
+			System.out.println("No Records Found!!!");
 		}
 		
-		sc.close();
+	
 		return list;
 		
 	}
@@ -155,7 +160,7 @@ public class LeavesDaoImpl implements LeavesDao{
 	}
 	
 	@Override
-	public List<LeavesImpl> pendingLeaves() throws LeavesException {
+	public List<LeavesImpl> pendingLeaves() throws LeavesException, InterruptedException {
 		List<LeavesImpl> list=new ArrayList<>();
 		Scanner sc = new Scanner(System.in);
 		try(Connection con= DBUtils.connectToDatabase()) {
@@ -181,12 +186,13 @@ public class LeavesDaoImpl implements LeavesDao{
 				leave.setLeaveId(rs.getInt("leaveid"));
 				int leaveid = leave.getLeaveId();
 				list.add(leave);
-					
+				System.out.println(ConsoleColors.BLUE_BOLD);
 				System.out.println("Employeeid : "+empid+ " Name : "+name+ " Leave From : "+leavestartdate+" Leave Till : "+leaveend);
 				System.out.println("Press 1 to Approve");
 				System.out.println("Press 2 to Reject");
 				System.out.println("Press 0 to Go Back to Main Menu");
 				int choice = sc.nextInt();
+				System.out.println(ConsoleColors.RESET);
 				PendingLeavesStatusUpdate(leaveid,choice);
 				
 				}
@@ -202,7 +208,7 @@ public class LeavesDaoImpl implements LeavesDao{
 		return list;
 	}
 	
-	public static boolean PendingLeavesStatusUpdate(int leaveid,int choice) {
+	public static boolean PendingLeavesStatusUpdate(int leaveid,int choice) throws InterruptedException {
 
 		Connection conn = null;
 

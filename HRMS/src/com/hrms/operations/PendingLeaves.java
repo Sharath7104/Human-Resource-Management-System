@@ -9,7 +9,7 @@ import com.hrms.exception.LeavesException;
 import com.hrms.tablesprint.PrintTable;
 
 public class PendingLeaves {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		LeavesDao leave=new LeavesDaoImpl();
 		List<LeavesImpl> list=null;
 		try {

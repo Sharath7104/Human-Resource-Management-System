@@ -26,7 +26,6 @@ public class GetEmployeeByDepartment {
 			e.printStackTrace();
 		}
 		
-		sc.close();
 
 	}
 }

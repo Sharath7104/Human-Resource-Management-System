@@ -10,15 +10,15 @@ import com.hrms.menudisplay.MenuDisplay;
 import com.hrms.tablesprint.ConsoleColors;
 
 public class LoginMain {
-	public static void main(String[] args) throws EmployeeException {
+	public static void main(String[] args) throws EmployeeException, InterruptedException {
 		Scanner sc = new Scanner(System.in);
 		
 		int choice;
 		do {
-			System.out.println("Please choose Option");
-			System.out.println("1.Admin Login");
-			System.out.println("2.Employee Login");
-			System.out.println("0.Exit");
+			System.out.println(ConsoleColors.ANSI_GREEN+"*** Please choose Option ***"+ConsoleColors.ANSI_RESET);
+			System.out.println(ConsoleColors.BLUE_BOLD +" 1.Admin Login");
+			System.out.println(" 2.Employee Login");
+			System.out.println(" 0.Exit");
 			choice = sc.nextInt();
 			
 			switch(choice) {
@@ -48,7 +48,7 @@ public class LoginMain {
 				
 				
 			case 0:
-				System.out.println(ConsoleColors.GREEN+"Thank you see you again!!!");
+				System.out.println(ConsoleColors.GREEN+"Thank you see you again!!!"+ConsoleColors.RESET);
 				System.exit(0);
 				break;
 				

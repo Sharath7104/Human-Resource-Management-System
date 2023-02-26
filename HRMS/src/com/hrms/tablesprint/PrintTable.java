@@ -13,12 +13,13 @@ public class PrintTable {
 		try {
 			System.out.println();
 
-			System.out.println("╔══════════DEPARTMENT LIST════════════╗");
+			System.out.println(ConsoleColors.CYAN_BOLD+ "╔══════════DEPARTMENT LIST════════════╗");
 			Thread.sleep(30);
 			System.out.printf("%10s %15s", "║ DEPARTMENT ID ║","   DEPARTMENT NAME  ║");  
 			System.out.println();   
 
 			System.out.println("╠═════════════════════════════════════╣");
+			
 		} catch (InterruptedException e) {}
 		
 		
@@ -35,10 +36,12 @@ public class PrintTable {
 				Thread.sleep(30);
 				System.out.println("╚═════════════════════════════════════╝");
 			}
-			} catch (InterruptedException e) {}
+			} catch (InterruptedException ex) {
+				ex.printStackTrace();
+			}
 		}  
 		 
-		System.out.println();
+		System.out.println(ConsoleColors.RESET);
 		
 	}
 	
@@ -47,29 +50,29 @@ public class PrintTable {
 
 		try {
 
-		System.out.println("╔══════════EMPLOYEE DETAILS═════════╗");
+		System.out.println(ConsoleColors.CYAN_BOLD+ "╔══════════EMPLOYEE DETAILS═════════╗");
 		Thread.sleep(20);
 		System.out.println("");
 		Thread.sleep(20);
-		System.out.println("   ID       : "+employee.getId());
+		System.out.println("   EmployeeID : "+employee.getId());
 		Thread.sleep(20);
-		System.out.println("   Name     : "+employee.getFirstName()+" "+employee.getLastName());
+		System.out.println("   Name       : "+employee.getFirstName()+" "+employee.getLastName());
 		Thread.sleep(20);
-		System.out.println("   Mobile   : "+employee.getMobile());
+		System.out.println("   Mobile     : "+employee.getMobile());
 		Thread.sleep(20);
-		System.out.println("   Email    : "+employee.getEmail());
+		System.out.println("   Email      : "+employee.getEmail());
 		Thread.sleep(20);
-		System.out.println("   Password : "+employee.getPassword());
+		System.out.println("   Password   : "+employee.getPassword());
 		Thread.sleep(20);
-		System.out.println("   DOB      : "+employee.getDateOfBirth());
+		System.out.println("   DOB        : "+employee.getDateOfBirth());
 		Thread.sleep(20);
-		System.out.println("   Address  : "+employee.getAddress());
+		System.out.println("   Address    : "+employee.getAddress());
 		Thread.sleep(20);
-		System.out.println("   Salary   : "+employee.getSalary());
+		System.out.println("   Salary     : "+employee.getSalary());
 		Thread.sleep(20);
-		System.out.println("   DOJ      : "+employee.getDateOfJoining());
+		System.out.println("   DOJ        : "+employee.getDateOfJoining());
 		Thread.sleep(20);
-		System.out.println("   DEP.ID   : "+employee.getDepartmentId());
+		System.out.println("   DEPT.ID    : "+employee.getDepartmentId());
 		Thread.sleep(20);
 
 		System.out.println("╚═══════════════════════════════════╝");
@@ -77,7 +80,10 @@ public class PrintTable {
 		} catch (InterruptedException e1) {}
 		try {
 			Thread.sleep(3000);
-		} catch (InterruptedException e1) {}
+		} catch (InterruptedException ex) {
+			ex.printStackTrace();
+		}
+		System.out.println(ConsoleColors.RESET);
 	}
 	
 public static void printEmployeeList(List<EmployeeImpl>list){
@@ -93,7 +99,7 @@ public static void printEmployeeList(List<EmployeeImpl>list){
 		}
  
 		System.out.println();
-		System.out.println("════════════════════════════════════════════════════════════════════════════════════════");
+		System.out.println(ConsoleColors.CYAN_BOLD+ "════════════════════════════════════════════════════════════════════════════════════════");
 		
 		for(EmployeeImpl e: list){ 
 			 
@@ -123,9 +129,12 @@ public static void printEmployeeList(List<EmployeeImpl>list){
 			Thread.sleep(20);
 			System.out.println("════════════════════════════════════════════════════════════════════════════════════════");
 			Thread.sleep(20);
-			} catch (InterruptedException e1) {}
+			} catch (InterruptedException ex) {
+				ex.printStackTrace();
+			}
+			
 		} 
-		
+		System.out.println(ConsoleColors.RESET);
 		try {
 			Thread.sleep(3000);
 		} catch (InterruptedException e1) {}
@@ -135,7 +144,7 @@ public static void printEmployeeList(List<EmployeeImpl>list){
 public static void printLeaveList(List<LeavesImpl>list) {
 	for(LeavesImpl leave:list) {
 		try {
-		System.out.println("═══════════════════════════════════");
+		System.out.println(ConsoleColors.CYAN_BOLD+ "═══════════════════════════════════");
 		System.out.println();
 		System.out.println("EMPLOYEE ID   : "+leave.getEmployeeId());
 		Thread.sleep(20);
@@ -153,15 +162,15 @@ public static void printLeaveList(List<LeavesImpl>list) {
 		} catch (InterruptedException e) {}
 	}
 	System.out.println("═══════════════════════════════════");
-	System.out.println();
+	System.out.println(ConsoleColors.RESET);
 }
 
 
 public static void employeeLeaveStatusPrint(List<LeavesImpl>list) {
-	System.out.println("═══════════LEAVE STATUS═══════════");
+	System.out.println(ConsoleColors.CYAN_BOLD+ "═══════════LEAVE STATUS═══════════");
 	for(LeavesImpl leave:list) {
 		try {
-		System.out.println("═══════════════════════════════════");
+		
 		System.out.println();
 		System.out.println("EMPLOYEE NAME : "+leave.getFirstName()+" "+leave.getLastName());
 		Thread.sleep(20);
@@ -182,6 +191,6 @@ public static void employeeLeaveStatusPrint(List<LeavesImpl>list) {
 		} catch (InterruptedException e) {}
 	}
 	System.out.println("═══════════════════════════════════");
-	System.out.println();
+	System.out.println(ConsoleColors.RESET);
 }
 }
