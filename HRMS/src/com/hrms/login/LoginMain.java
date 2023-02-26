@@ -7,6 +7,7 @@ import com.hrms.dto.EmployeeImpl;
 import com.hrms.exception.DepartmentException;
 import com.hrms.exception.EmployeeException;
 import com.hrms.menudisplay.MenuDisplay;
+import com.hrms.tablesprint.ConsoleColors;
 
 public class LoginMain {
 	public static void main(String[] args) throws EmployeeException {
@@ -47,7 +48,7 @@ public class LoginMain {
 				
 				
 			case 0:
-				System.out.println("Thank you see you again!!!");
+				System.out.println(ConsoleColors.GREEN+"Thank you see you again!!!");
 				System.exit(0);
 				break;
 				
@@ -57,5 +58,6 @@ public class LoginMain {
 			
 		}while(choice!=0);
 		
+		sc.close();
 	}
 }

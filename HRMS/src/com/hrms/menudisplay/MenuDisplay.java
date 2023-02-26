@@ -5,22 +5,27 @@ import java.util.Scanner;
 import com.hrms.dto.EmployeeImpl;
 import com.hrms.exception.DepartmentException;
 import com.hrms.exception.EmployeeException;
+import com.hrms.exception.LeavesException;
 import com.hrms.operations.AddDepartment;
 import com.hrms.operations.AddNewEmployee;
 import com.hrms.operations.ApplyLeave;
 import com.hrms.operations.ChangeEmployeeDepartment;
 import com.hrms.operations.ChangeEmployeePassword;
+import com.hrms.operations.EmployeeLeaveStatus;
 import com.hrms.operations.GetAllDepartment;
 import com.hrms.operations.GetAllEmployee;
 import com.hrms.operations.GetEmployeeByDepartment;
 import com.hrms.operations.GetEmployeeById;
 import com.hrms.operations.PendingLeaves;
+import com.hrms.operations.ShowAllApprovedLeaves;
+import com.hrms.operations.ShowAllRejectedLeave;
 import com.hrms.operations.UpdateDepartment;
 import com.hrms.operations.UpdateEmployee;
 
 public class MenuDisplay {
 	public static void admin() throws DepartmentException, EmployeeException {
 		int choice = 0;
+		Scanner sc = new Scanner(System.in);
 		do {
 			System.out.println("1.Add Department");
 			System.out.println("2.View All Departments");
@@ -32,9 +37,12 @@ public class MenuDisplay {
 			System.out.println("8.Get Employee By Id");
 			System.out.println("9.Get Employee By Department");
 			System.out.println("10.Update Employee");
-			System.out.println("11.View Leave Requests");
+			System.out.println("11.View Pending Leave Requests");
+			System.out.println("12.View Approved Leave Requests");
+			System.out.println("13.View Rejected Leave Requests");
+			System.out.println("Press 0 to Logout");
 			System.out.println("Choose Option");
-			Scanner sc = new Scanner(System.in);
+			
 			choice = sc.nextInt();
 			
 			switch(choice) {
@@ -79,12 +87,20 @@ public class MenuDisplay {
 			case 11:
 				PendingLeaves.main(null);
 				break;
+			case 12:
+				ShowAllApprovedLeaves.main(null);
+				break;
+			case 13:
+				ShowAllRejectedLeave.main(null);
+				break;
 			default:
 				System.out.println("Please Enter valid Input");
 			}
 			
+			
+			
 		}while(choice != 0);
-		
+		sc.close();
 	}
 	
 	
@@ -132,7 +148,12 @@ public class MenuDisplay {
     			break;
     			
     		case 5:
-//    			PendingLeaves.main(null);
+    			try {
+					EmployeeLeaveStatus.main(employee.getId());
+				} catch (LeavesException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
     			break;
     		case 0:
     			System.out.println("Thank You See You Again!!");
@@ -141,11 +162,8 @@ public class MenuDisplay {
     				System.out.println("Wrong Input");
     		}
     	}while(choice != 0);
+    	
+    	sc.close();
     }
     
-    
-
-    
-    
-	
 }
