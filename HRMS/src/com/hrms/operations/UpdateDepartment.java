@@ -15,7 +15,7 @@ public class UpdateDepartment {
 		sc.nextLine();
 		System.out.println("Enter New Name for Department");
 		String newdeptname = sc.nextLine();
-		
+		sc.close();
 		DepartmentDao deptdao = new DepartmentDaoImpl();
 		
 		try {

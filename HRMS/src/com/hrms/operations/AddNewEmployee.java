@@ -35,7 +35,7 @@ public class AddNewEmployee {
 		EmployeeDao empdao = new EmployeeDaoImpl();
 		empdao.registerEmployee(new EmployeeImpl(fname,lname,mob,email,pass,dob,add,sal,jd,did));
 		
-		
+		sc.close();
 	
 	}
 }

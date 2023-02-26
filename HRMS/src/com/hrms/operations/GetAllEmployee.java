@@ -6,6 +6,7 @@ import com.hrms.dao.EmployeeDao;
 import com.hrms.dao.EmployeeDaoImpl;
 import com.hrms.dto.EmployeeImpl;
 import com.hrms.exception.EmployeeException;
+import com.hrms.tablesprint.PrintTable;
 
 public class GetAllEmployee {
 public static void main(String[] args) throws EmployeeException {
@@ -15,8 +16,8 @@ public static void main(String[] args) throws EmployeeException {
 		try {
 			List<EmployeeImpl>list=dao.getAllEmployee();
 			
-//			PrintTable.printDepartment(list);
-			System.out.println(list.toString());
+			PrintTable.printEmployeeList(list);
+
 		} catch (EmployeeException e) {
 			System.out.println(e.getMessage());
 		}

@@ -35,6 +35,7 @@ public class EmployeeImpl implements Employee{
 	public EmployeeImpl(int id,String firstName, String lastName, String mobile, String email, String password,
 			String dateOfBirth, String address, int salary, String dateOfJoining, int departmentId) {
 		super();
+		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.mobile = mobile;
@@ -50,6 +51,7 @@ public class EmployeeImpl implements Employee{
 	public int getId() {
 		return id;
 	}
+	
 	public void setId(int id) {
 		this.id = id;
 	}

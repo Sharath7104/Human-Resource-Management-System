@@ -22,6 +22,6 @@ public static void main(int id, String fname,String lname,int departmentid) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
-	
+	sc.close();
 }
 }

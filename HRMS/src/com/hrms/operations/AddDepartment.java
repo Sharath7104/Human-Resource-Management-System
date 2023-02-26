@@ -20,5 +20,6 @@ public class AddDepartment {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		sc.close();
 	}
 }

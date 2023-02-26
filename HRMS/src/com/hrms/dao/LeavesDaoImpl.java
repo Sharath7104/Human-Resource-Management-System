@@ -14,6 +14,7 @@ import com.hrms.exception.DepartmentException;
 import com.hrms.exception.EmployeeException;
 import com.hrms.exception.LeavesException;
 import com.hrms.menudisplay.MenuDisplay;
+import com.hrms.operations.PendingLeaves;
 
 public class LeavesDaoImpl implements LeavesDao{
 
@@ -39,21 +40,124 @@ public class LeavesDaoImpl implements LeavesDao{
 	}
 
 	@Override
-	public String approvedLeave(int id) throws LeavesException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LeavesImpl> approvedLeave() throws LeavesException {
+		List<LeavesImpl> list=new ArrayList<>();
+		Scanner sc = new Scanner(System.in);
+		try(Connection con= DBUtils.connectToDatabase()) {
+			
+			PreparedStatement ps=con.prepareStatement("select l.leaveid,l.empid, l.status, e.firstname, e.lastname, l.leavestart, l.leaveend, e.departmentid from leaves l inner join employee e on e.id=l.empid and l.status='approved';");
+			
+			ResultSet rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				LeavesImpl leave=new LeavesImpl();
+				leave.setEmployeeId(rs.getInt("empid"));
+				int empid = leave.getEmployeeId();
+				leave.setLeaveStart(rs.getString("leavestart"));
+				String leavestartdate = leave.getLeaveStart();
+				leave.setLeaveEnd(rs.getString("leaveend"));
+				String leaveend = leave.getLeaveEnd();
+				leave.setStatus(rs.getString("status"));
+				leave.setFirstName(rs.getString("firstname"));
+				String name = leave.getFirstName();
+				leave.setLastName(rs.getString("lastname"));
+				leave.setDepartmentId(rs.getInt("departmentid"));
+				leave.setLeaveId(rs.getInt("leaveid"));
+				list.add(leave);
+					
+				
+				}
+				
+			}
+			
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(list.size() == 0) {
+			System.out.println("No Pending Leaves!!!");
+		}
+		
+		sc.close();
+		return list;
 	}
 
 	@Override
-	public String rejectLeave(int id) throws LeavesException {
-		// TODO Auto-generated method stub
-		return null;
+	public List<LeavesImpl> showAllRejectLeave() throws LeavesException {
+		List<LeavesImpl> list=new ArrayList<>();
+		Scanner sc = new Scanner(System.in);
+		try(Connection con= DBUtils.connectToDatabase()) {
+			
+			PreparedStatement ps=con.prepareStatement("select l.leaveid,l.empid, l.status, e.firstname, e.lastname, l.leavestart, l.leaveend, e.departmentid from leaves l inner join employee e on e.id=l.empid and l.status='rejected';");
+			
+			ResultSet rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				LeavesImpl leave=new LeavesImpl();
+				leave.setEmployeeId(rs.getInt("empid"));
+				int empid = leave.getEmployeeId();
+				leave.setLeaveStart(rs.getString("leavestart"));
+				String leavestartdate = leave.getLeaveStart();
+				leave.setLeaveEnd(rs.getString("leaveend"));
+				String leaveend = leave.getLeaveEnd();
+				leave.setStatus(rs.getString("status"));
+				leave.setFirstName(rs.getString("firstname"));
+				String name = leave.getFirstName();
+				leave.setLastName(rs.getString("lastname"));
+				leave.setDepartmentId(rs.getInt("departmentid"));
+				leave.setLeaveId(rs.getInt("leaveid"));
+				list.add(leave);
+					
+				
+				}
+				
+			}
+			
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(list.size() == 0) {
+			System.out.println("No Pending Leaves!!!");
+		}
+		
+		sc.close();
+		return list;
+		
 	}
-
+	
+	@Override
+	public List<LeavesImpl> employeeLeaveStatus(int id) throws LeavesException{
+		List<LeavesImpl> list = new ArrayList<>();
+		
+		try(Connection conn = DBUtils.connectToDatabase()){
+			String selectquery = "select * from leaves where empid = ?";
+			PreparedStatement ps = conn.prepareStatement(selectquery);
+			ps.setInt(1, id);
+			ResultSet rs=ps.executeQuery();
+			
+			while(rs.next()) {
+				LeavesImpl leave=new LeavesImpl();
+				leave.setEmployeeId(rs.getInt("empid"));
+				leave.setLeaveStart(rs.getString("leavestart"));
+				leave.setLeaveEnd(rs.getString("leaveend"));
+				leave.setStatus(rs.getString("status"));
+				leave.setFirstName(rs.getString("firstname"));
+				leave.setLastName(rs.getString("lastname"));
+				leave.setDepartmentId(rs.getInt("departmentid"));
+				leave.setLeaveId(rs.getInt("leaveid"));
+				list.add(leave);
+				
+			}
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+		}
+		
+		return list;
+	}
+	
 	@Override
 	public List<LeavesImpl> pendingLeaves() throws LeavesException {
 		List<LeavesImpl> list=new ArrayList<>();
-		
+		Scanner sc = new Scanner(System.in);
 		try(Connection con= DBUtils.connectToDatabase()) {
 			
 			PreparedStatement ps=con.prepareStatement("select l.leaveid,l.empid, l.status, e.firstname, e.lastname, l.leavestart, l.leaveend, e.departmentid from leaves l inner join employee e on e.id=l.empid and l.status='pending';");
@@ -73,18 +177,18 @@ public class LeavesDaoImpl implements LeavesDao{
 				String name = leave.getFirstName();
 				leave.setLastName(rs.getString("lastname"));
 				leave.setDepartmentId(rs.getInt("departmentid"));
-				int deptid = leave.getDepartmentId();
+//				int deptid = leave.getDepartmentId();
 				leave.setLeaveId(rs.getInt("leaveid"));
 				int leaveid = leave.getLeaveId();
 				list.add(leave);
+					
+				System.out.println("Employeeid : "+empid+ " Name : "+name+ " Leave From : "+leavestartdate+" Leave Till : "+leaveend);
+				System.out.println("Press 1 to Approve");
+				System.out.println("Press 2 to Reject");
+				System.out.println("Press 0 to Go Back to Main Menu");
+				int choice = sc.nextInt();
+				PendingLeavesStatusUpdate(leaveid,choice);
 				
-				if(list.size() == 0) {
-					System.out.println("No Pending Leaves!!!");
-				}else {
-					System.out.println(leaveid);
-						System.out.println("Name : "+name+ " Leave From : "+leavestartdate+" Leave Till"+leaveend+" DepartmentId : "+deptid);
-						LeavesDaoImpl.PendingLeavesStatusUpdate(leaveid);
-					}
 				}
 				
 			}
@@ -92,42 +196,31 @@ public class LeavesDaoImpl implements LeavesDao{
 		catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-			
-		
-			
-		
+		if(list.size() == 0) {
+			System.out.println("No Pending Leaves!!!");
+		}
 		return list;
 	}
 	
-	public static boolean PendingLeavesStatusUpdate(int leaveid) {
-		Scanner sc = new Scanner(System.in);
+	public static boolean PendingLeavesStatusUpdate(int leaveid,int choice) {
+
 		Connection conn = null;
-		int choice;
+
 		boolean set = false;
-		LeavesDao leavedao = new LeavesDaoImpl();
-			System.out.println("Press 1 to Approve");
-			System.out.println("Press 2 to Reject");
-			System.out.println("Press 0 to Go back to Main Menu");
-			choice = sc.nextInt();
+
 			switch(choice) {
 			case 1:
 				try {
 					conn = DBUtils.connectToDatabase();
+					System.out.println(leaveid);
 					String updatequery = "update leaves set status= ? where leaveid=?";
 					PreparedStatement ps = conn.prepareStatement(updatequery);
 //					String approve = "Approved";
 					ps.setString(1,"Approved");
 					ps.setInt(2, leaveid);
 					
-					
 					set = ps.executeUpdate()>0 ? true : false;
-					try {
-						leavedao.pendingLeaves();
-					} catch (LeavesException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+
 				} catch (SQLException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
