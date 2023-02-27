@@ -21,3 +21,8 @@ Role of Employee:<br>
 -> Employee can also change his password.<br>
 -> Employee can also request for leaves.<br>
 
+
+<h4>Tech Stack Used</h4>
+<p>Java</p>
+
+<h5>Thank you</h5>
