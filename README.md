@@ -1,4 +1,4 @@
-Human Resource Management System
+<h1>Human Resource Management System</h1>
 
 The Primary Project Goal consists of:<br>
 -> The Admin can register Employees in given Departments.<br>
