@@ -27,6 +27,7 @@ public class Login {
 		}else {
 			return false;
 		}
+		
 	}
 	
 	
@@ -73,7 +74,7 @@ public class Login {
 			
 			
 		}catch(SQLException e) {
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		}
 		return emp;
 		

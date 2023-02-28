@@ -218,7 +218,7 @@ public class LeavesDaoImpl implements LeavesDao{
 			case 1:
 				try {
 					conn = DBUtils.connectToDatabase();
-					System.out.println(leaveid);
+//					System.out.println(leaveid);
 					String updatequery = "update leaves set status= ? where leaveid=?";
 					PreparedStatement ps = conn.prepareStatement(updatequery);
 //					String approve = "Approved";

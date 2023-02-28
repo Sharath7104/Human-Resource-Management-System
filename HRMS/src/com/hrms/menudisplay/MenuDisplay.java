@@ -2,6 +2,7 @@ package com.hrms.menudisplay;
 
 import java.util.Scanner;
 
+import com.hrms.dto.Employee;
 import com.hrms.dto.EmployeeImpl;
 import com.hrms.exception.DepartmentException;
 import com.hrms.exception.EmployeeException;
@@ -190,5 +191,33 @@ public class MenuDisplay {
     	
     	
     }
+    
+    public static void welcomeAdmin() {
+		try {
+//			System.out.println("████████████████████████████████████████████████████████████████████████████████");
+//			System.out.println();
+			Thread.sleep(500);
+			System.out.println(ConsoleColors.CYAN_BOLD+ "»»——————————————————————————　WELCOME TO ADMIN PANEL　——————————————————————————««" +ConsoleColors.RESET);
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+    
+    public static void welcomeEmployee(Employee employee) {
+		try {
+
+			System.out.println();
+			Thread.sleep(500);
+			System.out.println(ConsoleColors.CYAN_BOLD+"»»——————————————————————————　WELCOME "+employee.getFirstName().toUpperCase()+" "+employee.getLastName().toUpperCase()+" TO EMPLOYEE PANEL　——————————————————————————««"+ConsoleColors.RESET);
+			Thread.sleep(500);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
     
 }
