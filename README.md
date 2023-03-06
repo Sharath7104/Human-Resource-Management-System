@@ -25,4 +25,10 @@ Role of Employee:<br>
 <h4>Tech Stack Used</h4>
 <p>Java</p>
 
+<h4>Database:</h4>
+<p>MySql</p>
+
+<h4>Editor</h4>
+<p>Spring Tool Suite</p>
+
 <h5>Thank you</h5>
