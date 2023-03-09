@@ -31,4 +31,9 @@ Role of Employee:<br>
 <h4>Editor</h4>
 <p>Spring Tool Suite</p>
 
+<h4>ER Diagram</h4>
+
+![image](https://user-images.githubusercontent.com/112753751/224030092-3d0e9759-37de-44b5-ac6e-ec13f248e200.png)
+
+
 <h5>Thank you</h5>
